@@ -15,7 +15,7 @@ import {
 } from "./firebase.js";
 import { showLoading, hideLoading } from "./loading.js";
 import { showAlert, showConfirm } from "./alert.js";
-import { showClubCreationPopup } from "./clubcreation.js";
+import { showClubCreationPopup } from "./clubCreation.js";
 
 const createClubBtn = document.getElementById("createClubBtn");
 const clubListContainer = document.getElementById("clubList");
