@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spotlight Effect with 3D Animation</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap");
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Geist", sans-serif;
+        color: white;
+        overflow-x: hidden;
+        background: #000;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .container {
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        position: relative;
+        overflow: hidden;
+        background: #000;
+        perspective: 1000px;
+      }
+
+      .content {
+        padding: 2rem;
+        max-width: 90vw;
+        margin: 0 auto;
+        position: relative;
+        z-index: 10;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100%;
+        text-align: center;
+      }
+
+      /* 3D Rotation and Shimmer Effect */
+      h1 {
+        font-size: 6rem;
+        font-weight: 700;
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        background-image: linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0.8),
+          rgba(255, 255, 255, 0.4)
+        );
+        margin-bottom: 1.5rem;
+        text-transform: uppercase;
+        animation: shimmer 3s infinite linear, rotate3D 8s infinite ease-in-out;
+      }
+
+      @keyframes shimmer {
+        0% {
+          background-position: -500px;
+        }
+        100% {
+          background-position: 500px;
+        }
+      }
+
+      @keyframes rotate3D {
+        0% {
+          transform: rotateY(0deg) rotateX(0deg);
+        }
+        50% {
+          transform: rotateY(20deg) rotateX(10deg);
+        }
+        100% {
+          transform: rotateY(0deg) rotateX(0deg);
+        }
+      }
+
+      p {
+        font-size: 1.2rem;
+        color: rgb(209, 213, 219);
+        margin-bottom: 2rem;
+        line-height: 1.6;
+        max-width: 600px;
+      }
+
+      /* Button Styling */
+      .perfect-btn {
+        padding: 14px 36px;
+        font-size: 1.2rem;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        background: transparent;
+        color: #fff;
+        border: 2px solid #fff;
+        border-radius: 30px;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.4s ease;
+        cursor: pointer;
+        perspective: 1000px;
+        font-weight: 600;
+      }
+
+      .perfect-btn::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: #fff;
+        transition: left 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        z-index: -1;
+      }
+
+      .perfect-btn:hover::before {
+        left: 0;
+      }
+
+      .perfect-btn:hover {
+        color: #000;
+        transform: translateY(-3px);
+      }
+
+      /* 3D Button Click Effect */
+      .perfect-btn:active {
+        transform: scale(0.9) rotateX(10deg) rotateY(-10deg);
+        box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+      }
+
+      /* Ripple Effect */
+      .ripple {
+        position: absolute;
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        width: 10px;
+        height: 10px;
+        transform: translate(-50%, -50%) scale(0);
+        animation: rippleEffect 0.6s linear;
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      @keyframes rippleEffect {
+        to {
+          transform: translate(-50%, -50%) scale(20);
+          opacity: 0;
+        }
+      }
+
+      /* Mouse Follower */
+      .cursor {
+        width: 12px;
+        height: 12px;
+        border: 2px solid #fff;
+        border-radius: 50%;
+        position: absolute;
+        pointer-events: none;
+        transition: all 0.1s ease;
+        z-index: 9999;
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      .cursor.grow {
+        width: 24px;
+        height: 24px;
+        background: rgba(255, 255, 255, 0.3);
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        h1 {
+          font-size: 3rem;
+        }
+
+        p {
+          font-size: 1rem;
+        }
+
+        .perfect-btn {
+          font-size: 1rem;
+          padding: 10px 24px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="cursor"></div>
+    <div class="container">
+      <div class="content">
+        <h1>SOCIAL CAMPUS APP</h1>
+        <p>
+          A Platform For Students To Be Connected With Their College & College
+          Events.
+        </p>
+        <a href="./pages/account.html">
+          <button class="perfect-btn">Get Started</button>
+        </a>
+      </div>
+    </div>
+
+    <script>
+      // Mouse Follower
+      const cursor = document.querySelector(".cursor");
+      document.addEventListener("mousemove", (e) => {
+        cursor.style.left = `${e.clientX}px`;
+        cursor.style.top = `${e.clientY}px`;
+      });
+
+      // Hover effect
+      document.querySelectorAll(".perfect-btn").forEach((btn) => {
+        btn.addEventListener("mouseover", () => cursor.classList.add("grow"));
+        btn.addEventListener("mouseout", () => cursor.classList.remove("grow"));
+      });
+
+      // Ripple effect on button click
+      const btn = document.querySelector(".perfect-btn");
+      btn.addEventListener("click", (e) => {
+        // Ripple Effect
+        const ripple = document.createElement("span");
+        ripple.classList.add("ripple");
+        const rect = btn.getBoundingClientRect();
+        ripple.style.left = `${e.clientX - rect.left}px`;
+        ripple.style.top = `${e.clientY - rect.top}px`;
+        btn.appendChild(ripple);
+        setTimeout(() => ripple.remove(), 600);
+      });
+    </script>
+  </body>
+</html>

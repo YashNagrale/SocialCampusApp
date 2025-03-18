@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Post Event - Student Community Platform</title>
+
+    <link rel="stylesheet" href="../css/font.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/output.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  </head>
+  <body
+    class="bg-black text-white min-h-screen flex flex-col items-center justify-center p-5 pt-3"
+  >
+        <!-- loading bar -->
+        <div id="loading-overlay" class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center hidden z-50 overflow-hidden">
+          <div class="relative w-10 h-10 flex items-center justify-center">
+            <div class="w-8 h-8 border-4 border-gray-700 rounded-full"></div>
+            <div class="absolute w-8 h-8 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+          </div>
+        </div>
+        
+
+    <!-- Header -->
+    <header class="w-full mb-6 flex justify-between items-center">
+      <h1 class="text-3xl font-bold">Post an Event</h1>
+      <a href="../pages/event.html">
+        <button
+        class="bg-white font-semibold text-black rounded hover:bg-gray-200 py-1 px-3">
+        Events
+        <i class="fa-solid fa-arrow-up-right-from-square fa-xs ml-1"></i>
+        
+    </button>
+</a>
+    </header>
+
+    <!-- Main Content -->
+    <main class="w-full">
+      <p id="eventError" class="text-red-600 text-lg font-semibold pb-3"></p>
+      <div class="container flex gap-4">
+        <form
+          id="post-event-form"
+          class="w-1/2 space-y-6 p-4 rounded-lg border-2 border-[#3c3c3c]"
+        >
+          <!-- Image Upload -->
+          <label for="event-image" class="block text-xl font-medium text-start"
+            >Event Image:</label
+          >
+          <div
+            id="drop-zone"
+            
+            class="relative w-full h-40 bg-[#181818c4] rounded-xl flex items-center justify-center border-2 border-dashed border-gray-700 hover:border-white transition-all duration-300 cursor-pointer"
+          >
+            <span
+              id="upload-text"
+              class="text-gray-400 text-3xl font-bold text-center"
+              >Drag and drop or click to upload</span
+            >
+          </div>
+          <input type="file" id="event-image" accept="image/*" class="hidden" />
+
+          <!-- Title -->
+          <div>
+            <label for="event-title" class="block text-xl font-medium mb-3"
+              >Event Title:</label
+            >
+            <input
+              type="text"
+              id="event-title"
+              placeholder="Enter event title"
+              class="w-full p-2 bg-black border border-[#27272a] rounded text-white focus:outline-none focus:border-white"
+              required
+            />
+          </div>
+
+          <!-- Description -->
+          <div>
+            <label
+              for="event-description"
+              class="block text-xl font-medium mb-3"
+              >Description:</label
+            >
+            <textarea
+              id="event-description"
+              placeholder="Describe your event"
+              rows="4"
+              class="w-full p-2 bg-black border border-[#27272a] rounded text-white focus:outline-none focus:border-white"
+              required
+            ></textarea>
+          </div>
+
+          <!-- Submit Button -->
+          <button
+            type="submit"
+            class="w-full bg-white text-black py-2 rounded font-semibold hover:bg-gray-200"
+          >
+            Post Event
+          </button>
+        </form>
+
+        <div
+          id="form-preview"
+          class="w-1/2 p-4 space-y-6 rounded-lg border-2 border-[#3c3c3c]"
+        >
+          <div
+            for="event-image"
+            class="block text-xl font-medium mb-2 text-start"
+          >
+            Event Preview
+          </div>
+          <img
+            id="image-preview"
+            src="../assets/dummy-img.jpg"
+            alt="Event Preview"
+            name="dummy-img"
+            class="w-full h-40 object-cover rounded-xl"
+          />
+          <h2
+            id="preview-title"
+            class="text-xl font-medium text-white break-words"
+          >Preview Title</h2>
+          <p id="preview-description" class="text-gray-400 whitespace-pre-wrap break-words"> Preview Description</p>
+        </div>
+      </div>
+    </main>
+
+    <!-- Scripts -->
+    <script type="module" src="../scripts/firebase.js"></script>
+    <script type="module" src="../scripts/accountHandler.js"></script>
+    <script type="module" src="../scripts/loading.js"></script>
+    <script type="module" src="../scripts/fetchEvents.js"></script>
+    <script src="../scripts/post-event.js"></script>
+  </body>
+</html>
+
+

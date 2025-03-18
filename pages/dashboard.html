@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - Student Community Platform</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSB7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="../css/font.css">
+    <link rel="stylesheet" href="../css/dashboard.css" />
+    <link rel="stylesheet" href="../css/output.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+  </head>
+  <body class="text-white bg-black h-[100vh] flex flex-col overflow-hidden">
+    <!-- Loading Bar -->
+    <div
+    id="loading-overlay"
+    class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center hidden z-50 overflow-hidden"
+  >
+    <div class="relative w-10 h-10 flex items-center justify-center">
+      <div class="w-8 h-8 border-4 border-gray-700 rounded-full"></div>
+      <div
+        class="absolute w-8 h-8 border-4 border-white border-t-transparent rounded-full animate-spin"
+      ></div>
+    </div>
+  </div>
+
+    <!-- Header Section -->
+    <header class="p-5 pb-3">
+      <div class="mx-auto flex justify-between items-center">
+        <div class="flex items-center gap-6">
+          <!-- Username Display and Logout -->
+          <div class="flex font-medium items-center justify-center gap-3">
+            <div class="flex items-center justify-center gap-2">
+              <div
+                class="p-4 w-5 h-5 bg-white rounded-full flex items-center justify-center"
+              >
+                <span
+                  id="username-icon"
+                  class="text-black text-lg font-semibold">
+                </span>
+              </div>
+              <p id="username" class="text-lg"></p>
+            </div>
+          </div>
+          <!-- Navbar -->
+        </div>
+        <nav class="flex justify-center items-center">
+          <ul class="flex gap-4 justify-center items-center">
+            <li class="flex">
+              <a
+                href="./event.html"
+                class="text-[#8f8f8f] px-4 py-1 rounded-md transition-all duration-300 hover:bg-[#27272a] hover:text-white font-semibold flex items-center justify-center gap-1"
+              >
+                Events
+                <i
+                  class="fa-solid fa-arrow-up-right-from-square fa-xs ml-1"
+                ></i>
+              </a>
+            </li>
+            <li class="flex">
+              <a
+                href="./club.html"
+                class="text-[#8f8f8f] px-4 py-1 rounded-md transition-all duration-300 hover:bg-[#27272a] hover:text-white font-semibold flex items-center justify-center gap-1"
+              >
+                Clubs
+                <i
+                  class="fa-solid fa-arrow-up-right-from-square fa-xs ml-1"
+                ></i>
+              </a>
+            </li>
+            <li class="flex">
+              <a
+                href="./post-event.html"
+                class="text-[#8f8f8f] px-4 py-1 rounded-md transition-all duration-300 hover:bg-[#27272a] hover:text-white font-semibold flex items-center justify-center gap-1"
+              >
+                Post Event
+                <i
+                  class="fa-solid fa-arrow-up-right-from-square fa-xs ml-1"
+                ></i>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <button
+          id="logoutBtn"
+          class="bg-white font-semibold text-black py-1 px-3 rounded hover:bg-gray-200"
+        >
+          Logout
+        </button>
+      </div>
+    </header>
+
+
+
+
+
+
+    <main class="p-5 pt-1 flex gap-5 flex-1 overflow-hidden">
+
+      <!-- Events Section -->
+      <section
+        id="dashboard_events"
+        style="scrollbar-width: none;"
+        class="border-2 border-[#27272a] rounded-lg p-1 flex-1 min-w-0 overflow-y-auto"
+      >
+        <div id="events_list">
+          <!-- Events will be loaded dynamically here -->
+        </div>
+      </section>
+    
+      <!-- Aside Section -->
+      <aside class="w-1/4 min-w-[420px] gap-y-3 flex flex-col">
+    
+        <div style="scrollbar-width: none;" id="club_data" class="border-2 border-[#27272a] rounded-lg px-4 py-2 flex-1 overflow-y-auto">
+          <div class="flex items-center justify-between sticky top-0">
+
+            <h2 class="text-lg font-semibold">Clubs</h2>
+            <h2 id="total_clubs_count" class="text-lg font-semibold">0</h2>
+          </div>
+          
+
+          <table class="w-full mt-2"> 
+            <thead>
+              <tr class="border-b border-gray-700">
+                <th class="text-left py-2">Clubs</th>
+                <th class="text-end py-2">Members</th>
+              </tr>
+            </thead>
+            <tbody id="club_table_body">
+              <tr id="no_club_data_row">
+                <td colspan="3" class="text-center py-4 text-gray-500">No data available</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+
+        <div style="scrollbar-width: none;" id="events_data" class="border-2 border-[#27272a] rounded-lg px-4 py-2 flex-1 overflow-y-auto sticky top-0">
+          <div class="flex items-center justify-between">
+
+            <h2 class="text-lg font-semibold">Events</h2>
+            <h2 id="total_events_count" class="text-lg font-semibold">0</h2>
+          </div>
+          
+
+          <table class="w-full mt-2"> 
+            <thead>
+              <tr class="border-b border-gray-700">
+                <th class="text-left py-2">Event</th>
+                <th class="text-end py-2">Clicks</th>
+              </tr>
+            </thead>
+            <tbody id="events_table_body">
+              <tr id="no_data_row">
+                <td colspan="3" class="text-center py-4 text-gray-500">No data available</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </aside>
+    </main>
+    
+    
+
+
+    <!-- Scripts -->
+    <script type="module" src="../scripts/firebase.js"></script>
+    <script type="module" src="../scripts/accountHandler.js"></script>
+    <script type="module" src="../scripts/loading.js"></script>
+    <!-- <script type="module" src="../scripts/club.js"></script> -->
+    <script type="module" src="../scripts/userDashboardData.js"></script>
+
+  </body>
+</html>

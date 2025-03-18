@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Settings</title>
+    <!-- Using Tailwind CSS CDN for simplicity -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="css/output.css">
+    <style>
+        .tab-active {
+            background-color: black;
+            color: white;
+        }
+    </style>
+</head>
+<body class="bg-black text-white flex items-center justify-center min-h-screen">
+
+    <!-- loading bar -->
+    <div id="loading-overlay" class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center hidden z-50 overflow-hidden">
+        <div class="relative w-10 h-10 flex items-center justify-center">
+          <div class="w-8 h-8 border-4 border-gray-700 rounded-full"></div>
+          <div class="absolute w-8 h-8 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+        </div>
+      </div>
+      
+  
+
+    <div class="main-container">
+        <!-- Tabs -->
+        <div class="flex bg-[#27272a] p-1 rounded-md my-2">
+            <button id="login-tab" class="flex-1 py-1 px-4 rounded-md text-center tab-active cursor-pointer font-semibold" onclick="showTab('Login')">
+                Log In <i class="fas fa-right-to-bracket"></i>
+            </button>
+            <button id="signup-tab" class="flex-1 py-1 px-4 rounded-md text-center cursor-pointer font-semibold" onclick="showTab('Signup')">
+                Sign Up <i class="fas fa-user-plus"></i>
+            </button>
+        </div>
+        <div class="border-2 border-[#27272a] p-4 pt-0 rounded-lg shadow-lg w-full max-w-lg">
+            <!-- Login Tab Content -->
+            <div id="login-content" class="mt-4">
+                <p id="loginError" class="text-md text-red-600"></p>
+                <p class="text-lg font-semibold mb-2">Log In</p>
+                <p class="text-sm mb-4">Do login your with your account here. Click save when you're done.</p>
+                <form id="login-form">
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium mb-1">Email</label>
+                        <input type="email" placeholder="youremail@example.com" class="w-full p-2 rounded text-white bg-black border border-[#27272a] focus:outline-none focus:border-white" id="login-email" name="email" required> 
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium mb-1">Password</label>
+                        <input type="text" placeholder="Password" class="w-full p-2 rounded text-white bg-black border border-[#27272a] focus:outline-none focus:border-white" id="login-password" name="password" required>
+                    </div>
+                    <button type="submit" class="w-full bg-white text-black py-2 rounded hover:bg-gray-200 cursor-pointer">Save changes</button>
+                </form>
+            </div>
+
+            <!-- Sign Up Tab Content -->
+            <div id="signup-content" class="mt-4 hidden">
+                <p id="signupError" class="text-md text-red-600"></p>
+                <p class="text-lg font-semibold mb-2">Sign Up</p>
+                <p class="text-sm mb-4">To get started, create a new account here. Click save when you're done.</p>
+                <form id="signup-form">
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium mb-1">Name</label>
+                        <input type="text" placeholder="Your name" class="w-full p-2 rounded text-white bg-black border border-[#27272a] focus:outline-none focus:border-white" id="signup-name" name="signup-name" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium mb-1">Email</label>
+                        <input type="email" placeholder="youremail@example.com" class="w-full p-2 rounded text-white bg-black border border-[#27272a] focus:outline-none focus:border-white" id="signup-email" name="signup-email" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium mb-1">Password</label>
+                        <input type="password" placeholder="Enter password" class="w-full p-2 rounded text-white bg-black border border-[#27272a] focus:outline-none focus:border-white" id="signup-password" name="signup-password" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium mb-1">Confirm Password</label>
+                        <input type="password" placeholder="Confirm password" class="w-full p-2 rounded text-white bg-black border border-[#27272a] focus:outline-none focus:border-white" id="signup-confirm-password" name="signup-confirm-password" required>
+                    </div>
+                    <button type="submit" class="w-full bg-white text-black py-2 rounded hover:bg-gray-200 cursor-pointer">Save changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="../scripts/firebase.js"></script>
+    <script type="module" src="../scripts/accountHandler.js"></script>
+    <script type="module" src="../scripts/loading.js"></script>
+    <script src="../scripts/account.js"></script>
+</body>
+</html>
