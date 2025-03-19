@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Registration Form</title>
+    <style>
+      body {
+        font-family: "Google Sans", "Roboto", Arial, sans-serif;
+        background-color: #f5f5f5;
+        margin: 0;
+        padding: 40px 20px;
+        color: #202124;
+        line-height: 1.5;
+      }
+      .form-container {
+        max-width: 760px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+      }
+      .form-header {
+        background-color: #4285f4;
+        color: white;
+        padding: 24px 32px;
+        font-size: 28px;
+        font-weight: 400;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+        letter-spacing: 0.25px;
+      }
+      .form-description {
+        padding: 12px 32px;
+        color: #5f6368;
+        font-size: 14px;
+        border-bottom: 1px solid #e0e0e0;
+        background-color: #f8f9fa;
+      }
+      .form-content {
+        padding: 24px 32px;
+      }
+      .form-section {
+        margin-bottom: 30px;
+        padding-bottom: 24px;
+        border-bottom: 1px solid #e0e0e0;
+      }
+      .form-section:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+      }
+      .question {
+        margin-bottom: 24px;
+      }
+      .question-title {
+        font-size: 16px;
+        font-weight: 500;
+        margin-bottom: 12px;
+        color: #202124;
+      }
+      .question-description {
+        font-size: 12px;
+        color: #5f6368;
+        margin-bottom: 8px;
+      }
+      .required:after {
+        content: " *";
+        color: #d93025;
+      }
+      input[type="text"],
+      input[type="email"],
+      input[type="tel"],
+      select,
+      textarea {
+        width: 100%;
+        padding: 12px 14px;
+        border: 1px solid #dadce0;
+        border-radius: 4px;
+        font-size: 14px;
+        margin-top: 8px;
+        box-sizing: border-box;
+        transition: border 0.3s ease;
+        color: #202124;
+      }
+      input:focus,
+      select:focus,
+      textarea:focus {
+        border-color: #4285f4;
+        outline: none;
+        box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.2);
+      }
+      .radio-group {
+        margin-top: 12px;
+      }
+      .radio-option {
+        display: flex;
+        align-items: center;
+        margin: 10px 0;
+        cursor: pointer;
+      }
+      .radio-option input[type="radio"] {
+        margin-right: 10px;
+        cursor: pointer;
+        width: 18px;
+        height: 18px;
+      }
+      .radio-option label {
+        cursor: pointer;
+        font-size: 14px;
+      }
+      textarea {
+        height: 120px;
+        resize: vertical;
+      }
+      .qr-container {
+        border: 1px solid #dadce0;
+        padding: 24px;
+        text-align: center;
+        margin-top: 16px;
+        border-radius: 4px;
+        background-color: #f8f9fa;
+      }
+      .qr-title {
+        font-size: 15px;
+        font-weight: 500;
+        margin-bottom: 16px;
+        color: #202124;
+      }
+      .qr-info {
+        margin-top: 16px;
+        font-size: 14px;
+        color: #5f6368;
+      }
+      .submit-button {
+        background-color: #1a73e8;
+        color: white;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 500;
+        float: right;
+        transition: background-color 0.2s;
+        letter-spacing: 0.25px;
+        text-transform: uppercase;
+      }
+      .submit-button:hover {
+        background-color: #1765cc;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+      }
+      .form-footer {
+        padding: 24px 32px;
+        background-color: #f8f9fa;
+        border-top: 1px solid #e0e0e0;
+        overflow: hidden;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .required-note {
+        color: #d93025;
+        font-size: 12px;
+        margin-bottom: 24px;
+      }
+      .privacy-note {
+        font-size: 12px;
+        color: #5f6368;
+      }
+      .form-progress {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 32px;
+      }
+      .progress-circle {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background-color: #dadce0;
+        position: relative;
+      }
+      .progress-circle.active {
+        background-color: #4285f4;
+      }
+      .progress-line {
+        height: 2px;
+        background-color: #dadce0;
+        flex-grow: 1;
+        margin: 9px 8px 0 8px;
+      }
+      .clear-button {
+        background-color: transparent;
+        color: #5f6368;
+        border: none;
+        padding: 8px 16px;
+        cursor: pointer;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.25px;
+      }
+      .clear-button:hover {
+        background-color: rgba(0, 0, 0, 0.04);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="form-container">
+      <div class="form-header">Student Registration Form</div>
+
+      <div class="form-description">
+        Please complete this form accurately to register for the academic year
+        2025-2026. All fields marked with an asterisk (*) are mandatory.
+      </div>
+
+      <div class="form-content">
+        <div class="required-note">* Required</div>
+
+        <div class="form-section">
+          <div class="question">
+            <div class="question-title required">Full Name</div>
+            <div class="question-description">
+              Enter your name as it appears on official documents
+            </div>
+            <input type="text" placeholder="Your answer" required />
+          </div>
+        </div>
+
+        <div class="form-section">
+          <div class="question">
+            <div class="question-title required">Branch / Department</div>
+            <div class="question-description">
+              Select your current branch of study
+            </div>
+            <select required>
+              <option value="" disabled selected>Choose your branch</option>
+              <option value="cs">Computer Science & Engineering</option>
+              <option value="ec">
+                Electronics & Communication Engineering
+              </option>
+              <option value="ee">Electrical Engineering</option>
+              <option value="me">Mechanical Engineering</option>
+              <option value="ce">Civil Engineering</option>
+              <option value="ch">Chemical Engineering</option>
+              <option value="it">Information Technology</option>
+              <option value="bt">Biotechnology</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <div class="question">
+            <div class="question-title required">Roll Number</div>
+            <div class="question-description">
+              Enter your university roll number
+            </div>
+            <input type="text" placeholder="Your answer" required />
+          </div>
+        </div>
+
+        <div class="form-section">
+          <div class="question">
+            <div class="question-title required">Email Address</div>
+            <div class="question-description">
+              Provide an email address that you check regularly
+            </div>
+            <input type="email" placeholder="example@domain.com" required />
+          </div>
+        </div>
+
+        <div class="form-section">
+          <div class="question">
+            <div class="question-title required">Contact Number</div>
+            <div class="question-description">
+              Enter a valid phone number where you can be reached
+            </div>
+            <input type="tel" placeholder="+91 XXXXXXXXXX" required />
+          </div>
+        </div>
+
+        <div class="form-section">
+          <div class="question">
+            <div class="question-title required">Payment Method</div>
+            <div class="question-description">
+              Select your preferred payment method for registration fees
+            </div>
+            <div class="radio-group">
+              <div class="radio-option">
+                <input
+                  type="radio"
+                  id="upi"
+                  name="payment"
+                  value="upi"
+                  required
+                />
+                <label for="upi">UPI / Mobile Payment</label>
+              </div>
+              <div class="radio-option">
+                <input
+                  type="radio"
+                  id="netbanking"
+                  name="payment"
+                  value="netbanking"
+                />
+                <label for="netbanking"
+                  >Net Banking / Credit Card / Debit Card</label
+                >
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="cash" name="payment" value="cash" />
+                <label for="cash">Cash Payment (at Finance Office)</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="qr-container">
+            <div class="qr-title">Scan QR Code for Payment</div>
+            <img style="width:200px; height:200px"; src="https://www.emoderationskills.com/wp-content/uploads/2010/08/QR1.jpg" alt="QR Code for payment" />
+            <div class="qr-info">
+              <div><strong>UPI ID:</strong> institute@example</div>
+              <div><strong>Registration Fee:</strong> ₹2,500</div>
+              <div>
+                <strong>Reference:</strong> Include your Roll Number in payment
+                description
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <div class="question">
+            <div class="question-title required">Payment Proof</div>
+            <div class="question-description">
+              Please upload a screenshot or PDF of your successful payment
+            </div>
+            <div style="margin-top: 12px">
+              <input
+                type="file"
+                id="paymentProof"
+                name="paymentProof"
+                accept=".pdf,.jpg,.jpeg,.png"
+                required
+                style="border: none; padding: 8px 0"
+              />
+              <p style="margin-top: 8px; font-size: 12px; color: #5f6368">
+                Accepted file types: PDF, JPG, JPEG, PNG (Max size: 5MB)
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <div class="question">
+            <div class="question-title">Queries / Special Requirements</div>
+            <div class="question-description">
+              Please specify any special requirements or questions you may have
+            </div>
+            <textarea
+              placeholder="Enter your queries or special requirements here"
+            ></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-footer">
+        <div class="privacy-note">
+          Your information will be processed according to the institute's
+          privacy policy.
+        </div>
+        <div>
+          <button class="clear-button">Clear form</button>
+          <button class="submit-button">Submit</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -151,7 +151,7 @@ async function fetchClubDetails(clubId, totalClubs) {
   }
 }
 
-// ✅ Function to update the UI (club table)
+
 function updateClubTable(clubName, memberCount, totalClubs) {
   const tableBody = document.getElementById("club_table_body");
   const noDataRow = document.getElementById("no_club_data_row");
@@ -160,10 +160,10 @@ function updateClubTable(clubName, memberCount, totalClubs) {
   if (!tableBody) return;
   if (noDataRow) noDataRow.remove();
 
-  // ✅ Update total clubs count
+  
   if (totalClubsCount) totalClubsCount.textContent = totalClubs;
 
-  // ✅ Create a new row for the club
+  
   const newRow = document.createElement("tr");
   newRow.classList.add("border-b", "border-gray-700", "text-ellipsis");
   newRow.innerHTML = `
