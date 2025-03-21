@@ -143,13 +143,11 @@ if (eventSection) {
                       <p class="text-md text-gray-500">Created At: ${createdAt}</p>
                     </div>
 
-                    <a href="../pages/registerForm.html">
                     <button class="register-btn bg-white text-black font-semibold py-1 px-3 rounded hover:bg-gray-200" 
                     data-event-id="${doc.id}" 
                     data-created-by="${eventData.createdBy}">
                     Register
                     </button>
-                    </a>
                     </div>
                   </div>
                           <p class="event-desc text-md text-gray-400 pt-2"><span style="color:white;">Description: </span> ${
@@ -185,7 +183,6 @@ document.addEventListener("click", async (e) => {
     }
 
     if (user.displayName === eventCreator) {
-      // alert("You cannot register for your own event.");
       showAlert("You cannot register for your own event.", "warning");
       return;
     }
@@ -211,25 +208,19 @@ document.addEventListener("click", async (e) => {
           clickCount: increment(1),
           registeredUsers: [...registeredUsers, user.uid], // Add user UID to the array
         });
-        showAlert("Registered successfully!");
-        // try {
-        //   const querySnapshot = await getDocs(collection(db, "events"));
-          
-        //   querySnapshot.forEach(doc => {
-        //     // if (doc.id === "gWxzIctTTwCYslJOfqib") {
-        //       showConfirm("Click to confirm to register.", (confirmed) => {
-        //         if (confirmed) {
-        //           location.href = "../pages/registerForm.html";
-        //         } else {
-        //           console.log("User cancelled: false");
-        //         }
-        //       });
-        //     // }
-        //   });
+        // showAlert("Registered successfully!");
+        try {
+              showConfirm("Click to confirm to register.", (confirmed) => {
+                if (confirmed) {
+                  location.href = "../pages/registerForm.html";
+                } else {
+                  console.log("User cancelled: false");
+                }
+              });
         
-        // } catch (error) {
-        //   showAlert("Some error occurred");
-        // }
+        } catch (error) {
+          showAlert("Some error occurred");
+        }
         
         
       }
